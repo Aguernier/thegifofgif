@@ -1,0 +1,21 @@
+<div class="card mb-4 shadow-sm">
+    {% if post.gifUrl is not null %}
+        <img alt="" src="{{ post.gifUrl }}" width="100%"> 
+    {% endif %}
+    
+    <div class="card-body">
+        <h5>{{ post.title}}</h5>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+                <a 
+                    href="{{ path('post_show', {id: post.id }) }}" 
+                    class="btn btn-sm btn-outline-secondary" 
+                    type="button"
+                >
+                    Voir
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

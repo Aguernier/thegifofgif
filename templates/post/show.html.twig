@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td><img src="{{ post.gifUrl }}" alt=""></td>
+                </tr>
+                <tr>
+                    <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <td>Par {{ post.user.pseudonym  }}</td>
+                </tr>
+            </tbody>
+        </table> 
+        {% if comments is not empty %}
+            <h2>Commentaires</h2>
+        {% endif %}
+        <div class="row">
+            <div class="col">
+                {% if commentForm is not null %}
+                    {{ form_start(commentForm) }}
+                        {{ form_widget(commentForm) }}
+                        <button class="btn btn-primary">Commenter</button>
+                    {{ form_end(commentForm) }}
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="list-group">
+                    {% for comment in comments %}
+                        <div href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                            <small>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</small>
+                            </div>
+                            <p class="mb-1">{{ comment.message }}</p>
+                            <small>Par {{ comment.user.pseudonym }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
